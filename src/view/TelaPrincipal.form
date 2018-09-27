@@ -338,7 +338,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel5" alignment="0" min="-2" pref="162" max="-2" attributes="0"/>
+                                  <Component id="lblCaminhoRotulo" alignment="0" min="-2" pref="162" max="-2" attributes="0"/>
                                   <Component id="lblCaminho" min="-2" pref="425" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="220" max="-2" attributes="0"/>
@@ -364,7 +364,7 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="1" attributes="0">
                                           <Component id="jLabel16" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblXNRotulo" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Component id="lblXN" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="32767" attributes="0"/>
@@ -380,7 +380,7 @@
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblCaminhoRotulo" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="lblCaminho" min="-2" pref="33" max="-2" attributes="0"/>
                           </Group>
@@ -394,7 +394,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblXNRotulo" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="lblXN" min="-2" pref="35" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -443,12 +443,12 @@
                 <Property name="text" type="java.lang.String" value="Valor de H"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel4">
+            <Component class="javax.swing.JLabel" name="lblXNRotulo">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Comic Sans MS" size="12" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Valor de XN ( Marca da Interpola&#xe7;&#xe3;o )"/>
+                <Property name="text" type="java.lang.String" value="Valor de XNA ( Marca da Interpola&#xe7;&#xe3;o )"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblNs">
@@ -492,12 +492,12 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel5">
+            <Component class="javax.swing.JLabel" name="lblCaminhoRotulo">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Comic Sans MS" size="12" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Caminho D/A"/>
+                <Property name="text" type="java.lang.String" value="Caminho Ascendente"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblH">

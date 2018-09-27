@@ -1,19 +1,41 @@
-package view; 
+package view;
 
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.util.Arrays;
+import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Dercio Juizo
  * @author Imildo Sitoe
  * @author Silva Muzime
- * 
+ *
  */
-public class TelaPrincipal extends javax.swing.JFrame {
+public class TelaPrincipal extends JFrame implements ItemListener {
+
+    private final ButtonGroup group = new ButtonGroup();
 
     public TelaPrincipal() {
         initComponents();
         super.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        group.add(rbAscendente);
+        group.add(rbDescendente);
+        this.formula();
+        rbAscendente.addItemListener(this);
+        rbDescendente.addItemListener(this);
+    }
+
+    private String formula() {
+        String a = "";
+        if (rbAscendente.isSelected()) {
+            a = "Ascendente";
+        } else if (rbDescendente.isSelected()) {
+            a = "Descendente";
+        }
+        return a;
     }
 
     @SuppressWarnings("unchecked")
@@ -38,11 +60,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        lblXNRotulo = new javax.swing.JLabel();
         lblNs = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         lblCaminho = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        lblCaminhoRotulo = new javax.swing.JLabel();
         lblH = new javax.swing.JLabel();
         lblTeta = new javax.swing.JLabel();
         lblXN = new javax.swing.JLabel();
@@ -134,8 +156,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         jLabel7.setText("Valor de H");
 
-        jLabel4.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
-        jLabel4.setText("Valor de XN ( Marca da Interpolação )");
+        lblXNRotulo.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        lblXNRotulo.setText("Valor de XNA ( Marca da Interpolação )");
 
         lblNs.setBackground(new java.awt.Color(255, 255, 255));
         lblNs.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
@@ -149,8 +171,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         lblCaminho.setText("1  |  2  |  ...");
         lblCaminho.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
 
-        jLabel5.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
-        jLabel5.setText("Caminho D/A");
+        lblCaminhoRotulo.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        lblCaminhoRotulo.setText("Caminho Ascendente");
 
         lblH.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
         lblH.setText("0");
@@ -183,7 +205,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblCaminhoRotulo, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblCaminho, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(220, 220, 220)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -204,7 +226,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblXNRotulo, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblXN, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
         );
@@ -213,7 +235,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
+                        .addComponent(lblCaminhoRotulo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblCaminho, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -224,7 +246,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel4)
+                        .addComponent(lblXNRotulo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblXN, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18))
@@ -343,6 +365,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
         this.calcular();
     }//GEN-LAST:event_btnCalcularActionPerformed
 
+    @Override
+    public void itemStateChanged(ItemEvent e) {
+        if (e.getStateChange() == ItemEvent.SELECTED) {
+            if (e.getSource() == rbDescendente) {
+                this.calculoDescendente();
+            } else if (e.getSource() == rbAscendente) {
+                this.calculoAscendente();
+            }
+        }
+    }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -382,8 +415,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -395,11 +426,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblCaminho;
+    private javax.swing.JLabel lblCaminhoRotulo;
     private javax.swing.JLabel lblH;
     private javax.swing.JLabel lblNs;
     private javax.swing.JLabel lblResultado;
     private javax.swing.JLabel lblTeta;
     private javax.swing.JLabel lblXN;
+    private javax.swing.JLabel lblXNRotulo;
     private javax.swing.JRadioButton rbAscendente;
     private javax.swing.JRadioButton rbDescendente;
     private javax.swing.JTextArea txtFXi;
@@ -407,7 +440,56 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextArea txtXi;
     // End of variables declaration//GEN-END:variables
 
+    private double[] getValoresDeXi() {
+        int tam = txtXi.getText().split("\\s").length;
+        double[] a = new double[tam];
+        for (int i = 0; i < tam; i++) {
+            a[i] = Double.parseDouble(txtXi.getText().split("\\s")[i]);
+        }
+        return a;
+    }
+
+    private double[] getValoresDeFXi() {
+        int tam = txtFXi.getText().split("\\s").length;
+        double[] a = new double[tam];
+        for (int i = 0; i < tam; i++) {
+            a[i] = Double.parseDouble(txtFXi.getText().split("\\s")[i]);
+        }
+        return a;
+    }
+
+    private double[][] matriz() {
+        int tamX = txtXi.getText().split("\\s").length;
+        int tamFX = txtFXi.getText().split("\\s").length;
+        double matriz[][] = new double[2][tamFX];
+        for (int i = 0; i < tamX; i++) {
+            matriz[0][i] = Double.parseDouble(txtXi.getText().split("\\s")[i]);
+            matriz[1][i] = Double.parseDouble(txtFXi.getText().split("\\s")[i]);
+        }
+        return matriz;
+    }
+
     private void calcular() {
-        
+        if (txtXi.getText().split("\\s").length != txtFXi.getText().split("\\s").length) {
+            JOptionPane.showMessageDialog(null, "Foi introduzido um numero de valores diferentes");
+        } else {
+            // ....
+        }
+    }
+
+    private void calculoDescendente() {
+        try {
+            lblCaminhoRotulo.setText("Caminho Descendente");
+            lblXNRotulo.setText("Valor de XND ( Marca da Interpolação )");
+        } catch (NumberFormatException e) {
+        }
+    }
+
+    private void calculoAscendente() {
+        try {
+            lblCaminhoRotulo.setText("Caminho Ascendente");
+            lblXNRotulo.setText("Valor de XNA ( Marca da Interpolação )");
+        } catch (NumberFormatException e) {
+        }
     }
 }
