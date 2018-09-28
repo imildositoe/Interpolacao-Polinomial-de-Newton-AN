@@ -26,7 +26,7 @@ public class Ascendente extends Caminho {
         return valores;
     }
 
-    private double getXNA(double[] xi, double x) {
+    public double getXNA(double[] xi, double x) {
         for (int i = 0; i < xi.length; i++) {
             if (x > xi[i] && x < xi[i + 1]) {
                 return xi[i + 1];
@@ -34,14 +34,23 @@ public class Ascendente extends Caminho {
         }
         return 0;
     }
+    
+    public int posicaoXND(double[] xi, double x) {
+        for (int i = 0; i < xi.length; i++) {
+            if (x > xi[i] && x < xi[i + 1]) {
+                return i + 1;
+            }
+        }
+        return 0;
+    }
 
     @Override
-    protected double getTeta(double[] xi, double x) {
+    public double getTeta(double[] xi, double x) {
         return (x - this.getXNA(xi, x)) / super.getH(xi);
     }
 
     @Override
-    protected ArrayList getListaDeNs(double[] xi, double x, ArrayList<ArrayList> diferencas, int posicao) {
+    public ArrayList getListaDeNs(double[] xi, double x, ArrayList<ArrayList> diferencas, int posicao) {
         ArrayList<Double> listaDeNs = new ArrayList<>();
         double n = this.getTeta(xi, x);
         listaDeNs.add(n);

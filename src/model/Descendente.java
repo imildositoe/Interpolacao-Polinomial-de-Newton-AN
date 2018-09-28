@@ -30,7 +30,7 @@ public class Descendente extends Caminho {
         return caminhoDescendente(diferencas, posicao, i, valores);
     }
 
-    private double getXND(double[] xi, double x) { //Pode ocorrer um IndexOutOfBound por causa do [i+1]
+    public double getXND(double[] xi, double x) { //Pode ocorrer um IndexOutOfBound por causa do [i+1]
         for (int i = 0; i < xi.length; i++) {
             if (x > xi[i] && x < xi[i + 1]) {
                 return xi[i];
@@ -39,13 +39,22 @@ public class Descendente extends Caminho {
         return 0;
     }
 
+    public int posicaoXND(double[] xi, double x) {
+        for (int i = 0; i < xi.length; i++) {
+            if (x > xi[i] && x < xi[i + 1]) {
+                return i;
+            }
+        }
+        return 0;
+    }
+
     @Override
-    protected double getTeta(double[] xi, double x) {
+    public double getTeta(double[] xi, double x) {
         return (x - this.getXND(xi, x)) / super.getH(xi);
     }
 
     @Override
-    protected ArrayList getListaDeNs(double[] xi, double x, ArrayList<ArrayList> diferencas, int posicao) {
+    public ArrayList getListaDeNs(double[] xi, double x, ArrayList<ArrayList> diferencas, int posicao) {
         ArrayList<Double> listaDeNs = new ArrayList<>();
         double n = this.getTeta(xi, x);
         listaDeNs.add(n);

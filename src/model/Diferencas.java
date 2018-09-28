@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * @author Dercio Juizo
  * @author Imildo Sitoe
  * @author Silva Muzime
- * 
+ *
  */
 public class Diferencas {
 
@@ -18,13 +18,13 @@ public class Diferencas {
         for (int i = 0; i < matriz[1].length; i++) {
             ArrayList<Double> listaTemporaria = new ArrayList<>();
             listaTemporaria.clear();
-            
+
             if (i == 0) {
                 ArrayList firstCopy = new ArrayList();
                 for (int j = 0; j < matriz[1].length; j++) {
                     listaDelta.add(matriz[1][j]);
                 }
-                
+
                 for (int j = 0; j < matriz[1].length; j++) {
                     firstCopy.add(listaDelta.get(j));
                 }
@@ -40,7 +40,7 @@ public class Diferencas {
                         for (int k = 0; k < listaTemporaria.size(); k++) {
                             listaDelta.add(listaTemporaria.get(k));
                         }
-                        
+
                         for (int k = 0; k < listaDelta.size(); k++) {
                             secondCopy.add(listaDelta.get(k));
                         }
