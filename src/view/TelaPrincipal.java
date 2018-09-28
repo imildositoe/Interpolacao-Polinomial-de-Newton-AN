@@ -2,10 +2,14 @@ package view;
 
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.util.Arrays;
+import java.util.ArrayList;
 import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import model.Ascendente;
+import model.Caminho;
+import model.Descendente;
+import model.Diferencas;
 
 /**
  *
@@ -17,6 +21,9 @@ import javax.swing.JOptionPane;
 public class TelaPrincipal extends JFrame implements ItemListener {
 
     private final ButtonGroup group = new ButtonGroup();
+    private final Ascendente asc = new Ascendente();
+    private final Descendente desc = new Descendente();
+    private final Diferencas dif = new Diferencas();
 
     public TelaPrincipal() {
         initComponents();
@@ -469,11 +476,47 @@ public class TelaPrincipal extends JFrame implements ItemListener {
         return matriz;
     }
 
+    private String caminhoAsc() {
+        String s = "";
+        for (Double a : asc.caminhoAscendente(dif.diferencas(this.matriz()), asc.posicaoXND(this.getValoresDeXi(), Double.parseDouble(txtValor.getText())))) {
+            s += Double.toString(a) + " | ";
+        }
+        return s;
+    }
+
+    private String caminhoDesc() {
+        String s = "";
+        for (Double a : desc.caminhoDescendente(dif.diferencas(this.matriz()), asc.posicaoXND(this.getValoresDeXi(), Double.parseDouble(txtValor.getText())))) {
+            s += Double.toString(a) + " | ";
+        }
+        return s;
+    }
+
+    private String getNsAsc() {
+        String s = "";
+        for (Double a : (ArrayList<Double>) asc.getListaDeNs(this.getValoresDeXi(), Double.parseDouble(txtValor.getText()), dif.diferencas(this.matriz()), asc.posicaoXND(this.getValoresDeXi(), Double.parseDouble(txtValor.getText())))) {
+            s += Double.toString(a) + " | ";
+        }
+        return s;
+    }
+
+    private String getNsDesc() {
+        String s = "";
+        for (Double a : (ArrayList<Double>) desc.getListaDeNs(this.getValoresDeXi(), Double.parseDouble(txtValor.getText()), dif.diferencas(this.matriz()), desc.posicaoXND(this.getValoresDeXi(), Double.parseDouble(txtValor.getText())))) {
+            s += Double.toString(a) + " | ";
+        }
+        return s;
+    }
+
     private void calcular() {
         if (txtXi.getText().split("\\s").length != txtFXi.getText().split("\\s").length) {
             JOptionPane.showMessageDialog(null, "Foi introduzido um numero de valores diferentes");
         } else {
-            // ....
+            if (this.formula().equals("Ascendente")) {
+                this.calculoAscendente();
+            } else if (this.formula().equals("Descendente")) {
+                this.calculoDescendente();
+            }
         }
     }
 
@@ -481,6 +524,12 @@ public class TelaPrincipal extends JFrame implements ItemListener {
         try {
             lblCaminhoRotulo.setText("Caminho Descendente");
             lblXNRotulo.setText("Valor de XND ( Marca da Interpolação )");
+            lblCaminho.setText(this.caminhoDesc());
+            lblH.setText(Double.toString(desc.getH(this.getValoresDeXi())));
+            lblTeta.setText(Double.toString(desc.getTeta(this.getValoresDeXi(), Double.parseDouble(txtValor.getText()))));
+            lblNs.setText(this.getNsDesc());
+            lblXN.setText(Double.toString(desc.getXND(this.getValoresDeXi(), Double.parseDouble(txtValor.getText()))));
+            lblResultado.setText(Double.toString(desc.getFDeX(dif.diferencas(this.matriz()), desc.posicaoXND(this.getValoresDeXi(), Double.parseDouble(txtValor.getText())), this.getValoresDeXi(), Double.parseDouble(txtValor.getText()))) + " +R");
         } catch (NumberFormatException e) {
         }
     }
@@ -489,6 +538,12 @@ public class TelaPrincipal extends JFrame implements ItemListener {
         try {
             lblCaminhoRotulo.setText("Caminho Ascendente");
             lblXNRotulo.setText("Valor de XNA ( Marca da Interpolação )");
+            lblCaminho.setText(this.caminhoAsc());
+            lblH.setText(Double.toString(asc.getH(this.getValoresDeXi())));
+            lblTeta.setText(Double.toString(asc.getTeta(this.getValoresDeXi(), Double.parseDouble(txtValor.getText()))));
+            lblNs.setText(this.getNsDesc());
+            lblXN.setText(Double.toString(asc.getXNA(this.getValoresDeXi(), Double.parseDouble(txtValor.getText()))));
+            lblResultado.setText(Double.toString(asc.getFDeX(dif.diferencas(this.matriz()), asc.posicaoXND(this.getValoresDeXi(), Double.parseDouble(txtValor.getText())), this.getValoresDeXi(), Double.parseDouble(txtValor.getText()))) + " +R");
         } catch (NumberFormatException e) {
         }
     }
