@@ -529,7 +529,7 @@ public class TelaPrincipal extends JFrame implements ItemListener {
             lblTeta.setText(Double.toString(desc.getTeta(this.getValoresDeXi(), Double.parseDouble(txtValor.getText()))));
             lblNs.setText(this.getNsDesc());
             lblXN.setText(Double.toString(desc.getXND(this.getValoresDeXi(), Double.parseDouble(txtValor.getText()))));
-            lblResultado.setText(Double.toString(desc.getFDeX(dif.diferencas(this.matriz()), desc.posicaoXND(this.getValoresDeXi(), Double.parseDouble(txtValor.getText())), this.getValoresDeXi(), Double.parseDouble(txtValor.getText()))) + " +R");
+            lblResultado.setText(Double.toString(desc.getFDeX(dif.diferencas(this.matriz()), desc.posicaoXND(this.getValoresDeXi(), Double.parseDouble(txtValor.getText())), this.getValoresDeXi(), Double.parseDouble(txtValor.getText()))) + " + R");
         } catch (NumberFormatException e) {
         }
     }
@@ -543,7 +543,7 @@ public class TelaPrincipal extends JFrame implements ItemListener {
             lblTeta.setText(Double.toString(asc.getTeta(this.getValoresDeXi(), Double.parseDouble(txtValor.getText()))));
             lblNs.setText(this.getNsDesc());
             lblXN.setText(Double.toString(asc.getXNA(this.getValoresDeXi(), Double.parseDouble(txtValor.getText()))));
-            lblResultado.setText(Double.toString(asc.getFDeX(dif.diferencas(this.matriz()), asc.posicaoXND(this.getValoresDeXi(), Double.parseDouble(txtValor.getText())), this.getValoresDeXi(), Double.parseDouble(txtValor.getText()))) + " +R");
+            lblResultado.setText(Double.toString(asc.getFDeX(dif.diferencas(this.matriz()), asc.posicaoXND(this.getValoresDeXi(), Double.parseDouble(txtValor.getText())), this.getValoresDeXi(), Double.parseDouble(txtValor.getText()))) + " + R");
         } catch (NumberFormatException e) {
         }
     }
