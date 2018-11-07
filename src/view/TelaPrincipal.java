@@ -2,6 +2,8 @@ package view;
 
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
@@ -478,32 +480,40 @@ public class TelaPrincipal extends JFrame implements ItemListener {
 
     private String caminhoAsc() {
         String s = "";
+        int posicao=1;
         for (Double a : asc.caminhoAscendente(dif.diferencas(this.matriz()), asc.posicaoXND(this.getValoresDeXi(), Double.parseDouble(txtValor.getText())))) {
-            s += Double.toString(a) + " | ";
+            s += " Δ"+posicao+":" +Double.toString(this.valorAproximado(a)) +" | ";
+            posicao+=1;
         }
         return s;
     }
 
     private String caminhoDesc() {
         String s = "";
-        for (Double a : desc.caminhoDescendente(dif.diferencas(this.matriz()), asc.posicaoXND(this.getValoresDeXi(), Double.parseDouble(txtValor.getText())))) {
-            s += Double.toString(a) + " | ";
+          int posicao=1;
+        for (Double a : desc.caminhoDescendente(dif.diferencas(this.matriz()), desc.posicaoXND(this.getValoresDeXi(), Double.parseDouble(txtValor.getText())))) {
+            s += " Δ"+posicao+":"+ Double.toString(this.valorAproximado(a)) + " | ";
+            posicao+=1;
         }
         return s;
     }
 
     private String getNsAsc() {
         String s = "";
+        int posicao=1;
         for (Double a : (ArrayList<Double>) asc.getListaDeNs(this.getValoresDeXi(), Double.parseDouble(txtValor.getText()), dif.diferencas(this.matriz()), asc.posicaoXND(this.getValoresDeXi(), Double.parseDouble(txtValor.getText())))) {
-            s += Double.toString(a) + " | ";
+            s += " N"+posicao+":"+ Double.toString(this.valorAproximado(a)) +  " | ";
+            posicao+=1;
         }
         return s;
     }
 
     private String getNsDesc() {
         String s = "";
+        int posicao=1;
         for (Double a : (ArrayList<Double>) desc.getListaDeNs(this.getValoresDeXi(), Double.parseDouble(txtValor.getText()), dif.diferencas(this.matriz()), desc.posicaoXND(this.getValoresDeXi(), Double.parseDouble(txtValor.getText())))) {
-            s += Double.toString(a) + " | ";
+            s += " N"+posicao+":"+Double.toString(this.valorAproximado(a)) + " | ";
+            posicao+=1;
         }
         return s;
     }
@@ -526,10 +536,11 @@ public class TelaPrincipal extends JFrame implements ItemListener {
             lblXNRotulo.setText("Valor de XND ( Marca da Interpolação )");
             lblCaminho.setText(this.caminhoDesc());
             lblH.setText(Double.toString(desc.getH(this.getValoresDeXi())));
-            lblTeta.setText(Double.toString(desc.getTeta(this.getValoresDeXi(), Double.parseDouble(txtValor.getText()))));
+            lblTeta.setText(Double.toString(this.valorAproximado(desc.getTeta(this.getValoresDeXi(), Double.parseDouble(txtValor.getText())))));
             lblNs.setText(this.getNsDesc());
-            lblXN.setText(Double.toString(desc.getXND(this.getValoresDeXi(), Double.parseDouble(txtValor.getText()))));
-            lblResultado.setText(Double.toString(desc.getFDeX(dif.diferencas(this.matriz()), desc.posicaoXND(this.getValoresDeXi(), Double.parseDouble(txtValor.getText())), this.getValoresDeXi(), Double.parseDouble(txtValor.getText()))) + " + R");
+            lblXN.setText(Double.toString(this.valorAproximado(desc.getXND(this.getValoresDeXi(), Double.parseDouble(txtValor.getText())))));
+            double valor=desc.getFDeX(dif.diferencas(this.matriz()), desc.posicaoXND(this.getValoresDeXi(), Double.parseDouble(txtValor.getText())), this.getValoresDeXi(), Double.parseDouble(txtValor.getText()));
+            lblResultado.setText(Double.toString(new BigDecimal(valor).setScale(5, RoundingMode.HALF_EVEN).doubleValue()) + " + R");
         } catch (NumberFormatException e) {
         }
     }
@@ -540,11 +551,18 @@ public class TelaPrincipal extends JFrame implements ItemListener {
             lblXNRotulo.setText("Valor de XNA ( Marca da Interpolação )");
             lblCaminho.setText(this.caminhoAsc());
             lblH.setText(Double.toString(asc.getH(this.getValoresDeXi())));
-            lblTeta.setText(Double.toString(asc.getTeta(this.getValoresDeXi(), Double.parseDouble(txtValor.getText()))));
-            lblNs.setText(this.getNsDesc());
-            lblXN.setText(Double.toString(asc.getXNA(this.getValoresDeXi(), Double.parseDouble(txtValor.getText()))));
-            lblResultado.setText(Double.toString(asc.getFDeX(dif.diferencas(this.matriz()), asc.posicaoXND(this.getValoresDeXi(), Double.parseDouble(txtValor.getText())), this.getValoresDeXi(), Double.parseDouble(txtValor.getText()))) + " + R");
+            lblTeta.setText(Double.toString(this.valorAproximado(asc.getTeta(this.getValoresDeXi(), Double.parseDouble(txtValor.getText())))));
+            lblNs.setText(this.getNsAsc());
+            lblXN.setText(Double.toString(this.valorAproximado(asc.getXNA(this.getValoresDeXi(), Double.parseDouble(txtValor.getText())))));
+            double valor=asc.getFDeX(dif.diferencas(this.matriz()), asc.posicaoXND(this.getValoresDeXi(), Double.parseDouble(txtValor.getText())), this.getValoresDeXi(), Double.parseDouble(txtValor.getText()));
+            lblResultado.setText(Double.toString(new BigDecimal(valor).setScale(5, RoundingMode.HALF_EVEN).doubleValue() )+ " + R");
         } catch (NumberFormatException e) {
         }
     }
+     private double valorAproximado(double valor){
+     
+     return new BigDecimal(valor).setScale(5, RoundingMode.HALF_EVEN).doubleValue();
+     
+     }
+    
 }
